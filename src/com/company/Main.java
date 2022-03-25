@@ -18,17 +18,17 @@ public class Main {
 
             if (str.equals("1")) {
                 System.out.println("Режим Шифрования\nВведите ключ:");
-                Path path = Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\source");
+                Path path = Path.of("source");
                 String original = Files.readString(path);
                 String encrypted = getEncryption(original, keyEntry());
                 System.out.println("\nИсходный текст: \n\n" + original + "\n\nЗашифрованный текст: \n\n" + encrypted);
                 while (true) {
-                    if (Files.exists(Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt"))) {
-                        Files.delete(Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt"));
+                    if (Files.exists(Path.of("encrypted.txt"))) {
+                        Files.delete(Path.of("encrypted.txt"));
                         continue;
                     } else {
-                        Files.createFile(Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt"));
-                        Files.write(Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt"), Collections.singleton(encrypted));
+                        Files.createFile(Path.of("encrypted.txt"));
+                        Files.write(Path.of("encrypted.txt"), Collections.singleton(encrypted));
                     }
                     break;
                 }
@@ -37,7 +37,7 @@ public class Main {
             } else if (str.equals("2")) {
 
                 System.out.println("Режим Расшифровки\nВведите ключ:");
-                Path path = Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt");
+                Path path = Path.of("encrypted.txt");
                 String encrypted = Files.readString(path);
                 String decrypted = getEncryption(encrypted, -1 * keyEntry());
                 System.out.println("\nЗашифрованный текст: \n\n" + encrypted + "\nРасшифрованный текст: \n\n" + decrypted);
@@ -46,7 +46,7 @@ public class Main {
 
             } else if (str.equals("3")) {
                 System.out.println("Режим Криптоанализа");
-                Path path = Path.of("C:\\Users\\uiv\\IdeaProjects\\project1\\encrypted.txt");
+                Path path = Path.of("encrypted.txt");
                 bruteForce(Files.readString(path));
                 break;
 
