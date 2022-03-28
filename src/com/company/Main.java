@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        printModeSelection();
+        MessageProvider.printModeSelection();
         Scanner scanner = new Scanner(System.in);
         label:
         while (scanner.hasNext()) {
@@ -21,7 +21,7 @@ public class Main {
                     System.out.println("Режим Шифрования\nВведите ключ:");
                     Path path = Path.of("source");
                     String original = Files.readString(path);
-                    String encrypted = Encryptor.getEncryption(original, keyEntry());
+                    String encrypted = Encryptor.getEncryption(original, MessageProvider.keyEntry());
                     System.out.println("\nИсходный текст: \n\n" + original + "\n\nЗашифрованный текст: \n\n" + encrypted);
                     while (true) {
                         if (Files.exists(Path.of("encrypted.txt"))) {
@@ -41,7 +41,7 @@ public class Main {
                     System.out.println("Режим Расшифровки\nВведите ключ:");
                     Path path = Path.of("encrypted.txt");
                     String encrypted = Files.readString(path);
-                    String decrypted = Encryptor.getEncryption(encrypted, -1 * keyEntry());
+                    String decrypted = Encryptor.getEncryption(encrypted, -1 * MessageProvider.keyEntry());
                     System.out.println("\nЗашифрованный текст: \n\n" + encrypted + "\nРасшифрованный текст: \n\n" + decrypted);
                     break label;
 
@@ -57,29 +57,10 @@ public class Main {
                     System.out.println("Выход");
                     break label;
                 default:
-                    printModeSelection();
+                    MessageProvider.printModeSelection();
                     break;
             }
         }
-    }
-
-    public static int keyEntry() {
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            if (scanner.hasNextInt()) {
-                return scanner.nextInt();
-            } else if (scanner.hasNextLine()) {
-                System.out.println("Введите ключ:");
-            }
-        }
-    }
-
-    public static void printModeSelection() {
-        System.out.println("Выберите режим работы: ");
-        System.out.println("1 - Режим Шифрования");
-        System.out.println("2 - Режим Расшифровки");
-        System.out.println("3 - Режим Криптоанализа");
-        System.out.println("0 - Выход");
     }
 
 }
