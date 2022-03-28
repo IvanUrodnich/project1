@@ -12,47 +12,53 @@ public class Main {
 
         printModeSelection();
         Scanner scanner = new Scanner(System.in);
+        label:
         while (scanner.hasNext()) {
             String str = scanner.nextLine();
 
-            if (str.equals("1")) {
-                System.out.println("Режим Шифрования\nВведите ключ:");
-                Path path = Path.of("source");
-                String original = Files.readString(path);
-                String encrypted = Encryptor.getEncryption(original, keyEntry());
-                System.out.println("\nИсходный текст: \n\n" + original + "\n\nЗашифрованный текст: \n\n" + encrypted);
-                while (true) {
-                    if (Files.exists(Path.of("encrypted.txt"))) {
-                        Files.delete(Path.of("encrypted.txt"));
-                        continue;
-                    } else {
-                        Files.createFile(Path.of("encrypted.txt"));
-                        Files.write(Path.of("encrypted.txt"), Collections.singleton(encrypted));
+            switch (str) {
+                case "1": {
+                    System.out.println("Режим Шифрования\nВведите ключ:");
+                    Path path = Path.of("source");
+                    String original = Files.readString(path);
+                    String encrypted = Encryptor.getEncryption(original, keyEntry());
+                    System.out.println("\nИсходный текст: \n\n" + original + "\n\nЗашифрованный текст: \n\n" + encrypted);
+                    while (true) {
+                        if (Files.exists(Path.of("encrypted.txt"))) {
+                            Files.delete(Path.of("encrypted.txt"));
+                            continue;
+                        } else {
+                            Files.createFile(Path.of("encrypted.txt"));
+                            Files.write(Path.of("encrypted.txt"), Collections.singleton(encrypted));
+                        }
+                        break;
                     }
-                    break;
+                    break label;
+
                 }
-                break;
+                case "2": {
 
-            } else if (str.equals("2")) {
+                    System.out.println("Режим Расшифровки\nВведите ключ:");
+                    Path path = Path.of("encrypted.txt");
+                    String encrypted = Files.readString(path);
+                    String decrypted = Encryptor.getEncryption(encrypted, -1 * keyEntry());
+                    System.out.println("\nЗашифрованный текст: \n\n" + encrypted + "\nРасшифрованный текст: \n\n" + decrypted);
+                    break label;
 
-                System.out.println("Режим Расшифровки\nВведите ключ:");
-                Path path = Path.of("encrypted.txt");
-                String encrypted = Files.readString(path);
-                String decrypted = Encryptor.getEncryption(encrypted, -1 * keyEntry());
-                System.out.println("\nЗашифрованный текст: \n\n" + encrypted + "\nРасшифрованный текст: \n\n" + decrypted);
-                break;
+                }
+                case "3": {
+                    System.out.println("Режим Криптоанализа");
+                    Path path = Path.of("encrypted.txt");
+                    Brutforce.bruteForce(Files.readString(path));
+                    break label;
 
-            } else if (str.equals("3")) {
-                System.out.println("Режим Криптоанализа");
-                Path path = Path.of("encrypted.txt");
-                Brutforce.bruteForce(Files.readString(path));
-                break;
-
-            } else if (str.equals("0")) {
-                System.out.println("Выход");
-                break;
-            } else {
-                printModeSelection();
+                }
+                case "0":
+                    System.out.println("Выход");
+                    break label;
+                default:
+                    printModeSelection();
+                    break;
             }
         }
     }
