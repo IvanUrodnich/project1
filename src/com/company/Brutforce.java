@@ -1,7 +1,12 @@
 package com.company;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Brutforce {
-    public static void bruteForce(String message) {
+
+    private static void bruteForce(String message) {
         StringBuilder result = new StringBuilder(message.length());
         char temp;
         int key;
@@ -27,6 +32,12 @@ public class Brutforce {
                 System.out.println("Совпадения не найдены");
             }
         }
+    }
+
+    public static void cryptanalysis() throws IOException {
+        System.out.println("Режим Криптоанализа");
+        Path path = Path.of("encrypted.txt");
+        bruteForce(Files.readString(path));
     }
 
 }

@@ -3,6 +3,7 @@ package com.company;
 import java.util.Scanner;
 
 public class MessageProvider {
+
     public static int keyEntry() {
         while (true) {
             Scanner scanner = new Scanner(System.in);
