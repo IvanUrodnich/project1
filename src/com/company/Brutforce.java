@@ -35,7 +35,7 @@ public class Brutforce {
     }
 
     public static void cryptanalysis() throws IOException {
-        System.out.println("Режим Криптоанализа");
+        System.out.println(Constant.CRYPTANALYSIS_MODE);
         Path path = Path.of("encrypted.txt");
         bruteForce(Files.readString(path));
     }
