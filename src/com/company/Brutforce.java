@@ -10,7 +10,7 @@ public class Brutforce {
         StringBuilder result = new StringBuilder(message.length());
         char temp;
         int key;
-        String coin = "даже";
+        String coin = Constant.SEARCH_MATCHES;
         for (int j = -63; j < 63; j++) {
             key = j;
             for (int i = 0; i < message.length(); i++) {
@@ -26,10 +26,10 @@ public class Brutforce {
             }
             String str = String.valueOf(result);
             if (str.contains(coin)) {
-                System.out.println("Расшифрованная строка:\n" + str + "\nКлюч шифрования: " + (-1) * key + "\nКлюч расшифровки: " + key);
+                System.out.println(Constant.DECIPHERED_TEXT + "\n" + str + "\n" + Constant.ENCRYPTION_KEY + (-1) * key + "\n" + Constant.DECRYPTION_KEY + key);
                 break;
             } else {
-                System.out.println("Совпадения не найдены");
+                System.out.println(Constant.NO_MATCHES_FOUND);
             }
         }
     }
