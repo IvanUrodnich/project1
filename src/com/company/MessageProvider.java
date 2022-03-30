@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+import static com.company.Constant.KEY_ENTRY;
 
 public class MessageProvider {
 
@@ -10,7 +11,7 @@ public class MessageProvider {
             if (scanner.hasNextInt()) {
                 return scanner.nextInt();
             } else if (scanner.hasNextLine()) {
-                System.out.println("Введите ключ:");
+                System.out.println(KEY_ENTRY);
             }
         }
     }

@@ -1,9 +1,6 @@
 package com.company;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -31,7 +28,7 @@ public class Main {
                     break label;
                 }
                 case "0":
-                    System.out.println("Выход");
+                    System.out.println(Constant.EXIT);
                     break label;
                 default:
                     MessageProvider.printModeSelection();

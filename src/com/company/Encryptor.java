@@ -25,11 +25,11 @@ public class Encryptor {
     }
 
     public static void encryption() throws IOException {
-        System.out.println("Режим Шифрования\nВведите ключ:");
+        System.out.println(Constant.ENCRYPTION_MODE + "\n" + Constant.KEY_ENTRY);
         Path path = Path.of("source");
         String original = Files.readString(path);
         String encrypted = getEncryption(original, MessageProvider.keyEntry());
-        System.out.println("\nИсходный текст: \n\n" + original + "\n\nЗашифрованный текст: \n\n" + encrypted);
+        System.out.println("\n" + Constant.SOURCE_TEXT + "\n\n" + original + "\n\n" + Constant.CIPHERTEXT + "\n\n" + encrypted);
         while (true) {
             if (Files.exists(Path.of("encrypted.txt"))) {
                 Files.delete(Path.of("encrypted.txt"));
@@ -43,11 +43,11 @@ public class Encryptor {
     }
 
     public static void decoding() throws IOException {
-        System.out.println("Режим Расшифровки\nВведите ключ:");
+        System.out.println(Constant.DECRYPT_MODE + "\n" + Constant.KEY_ENTRY);
         Path path = Path.of("encrypted.txt");
         String encrypted = Files.readString(path);
         String decrypted = getEncryption(encrypted, -1 * MessageProvider.keyEntry());
-        System.out.println("\nЗашифрованный текст: \n\n" + encrypted + "\nРасшифрованный текст: \n\n" + decrypted);
+        System.out.println("\n" + Constant.CIPHERTEXT + "\n\n" + encrypted + "\n" +Constant.DECIPHERED_TEXT + "\n\n" + decrypted);
     }
 
 }
